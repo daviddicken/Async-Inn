@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models.Interfaces.Services
 {
-    public class AmenityRepository
+    public class AmenityRepository : IAmenity
     {
         private readonly AsyncInnDbContext _context;
 
@@ -14,7 +14,6 @@ namespace AsyncInn.Models.Interfaces.Services
         {
             _context = context;
         }
-
 
         public async Task<Amenity> Create(Amenity amenity)
         {

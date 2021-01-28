@@ -38,7 +38,7 @@ namespace AsyncInn
 
             services.AddTransient<IRoom, RoomRepository>();
             services.AddTransient<IHotel, HotelRepository>();
-            //services.AddTransient<IAmenity, AmenityRepository>();
+            services.AddTransient<IAmenity, AmenityRepository>();
             
         }
 
