@@ -12,7 +12,7 @@ namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // creating something ne to push....
+   
     public class AmenityController : ControllerBase
     {
         private readonly IAmenity _amenity;
