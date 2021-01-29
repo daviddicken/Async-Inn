@@ -13,5 +13,6 @@ namespace AsyncInn.Models
         [Required]
         public string Item { get; set; }
 
+        public List<RoomAmenities> RoomAmenities { get; set; }
     }
 }

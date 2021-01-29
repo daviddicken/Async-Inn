@@ -26,21 +26,22 @@ namespace AsyncInn.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
-            return Ok (await _amenity.GetAmenities());
+            return await _amenity.GetAmenities();
         }
 
         // GET: api/Amenitys/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Amenity>> GetAmenity(int id)
         {
-            var amentiy = await _amenity.GetAmenity(id);
+            //var amentiy = await _amenity.GetAmenity(id);
 
-            if (amentiy == null)
-            {
-                return NotFound();
-            }
+            //if (amentiy == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return amentiy;
+            //return amentiy;
+            return await _amenity.GetAmenity(id);
         }
 
         // PUT: api/Amenities/5

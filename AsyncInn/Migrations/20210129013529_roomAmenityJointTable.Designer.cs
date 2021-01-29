@@ -3,14 +3,16 @@ using AsyncInn.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    partial class AsyncInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210129013529_roomAmenityJointTable")]
+    partial class roomAmenityJointTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,23 +173,6 @@ namespace AsyncInn.Migrations
                     b.HasIndex("AmenityId");
 
                     b.ToTable("RoomAmenities");
-
-                    b.HasData(
-                        new
-                        {
-                            RoomId = 2,
-                            AmenityId = 2
-                        },
-                        new
-                        {
-                            RoomId = 1,
-                            AmenityId = 3
-                        },
-                        new
-                        {
-                            RoomId = 2,
-                            AmenityId = 3
-                        });
                 });
 
             modelBuilder.Entity("AsyncInn.Models.RoomAmenities", b =>
