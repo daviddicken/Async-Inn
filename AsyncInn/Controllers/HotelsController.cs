@@ -12,11 +12,11 @@ namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HotelController : ControllerBase
+    public class HotelsController : ControllerBase
     {
         private readonly IHotel _hotel;
 
-        public HotelController(IHotel hotel)
+        public HotelsController(IHotel hotel)
         {
            _hotel = hotel;
         }

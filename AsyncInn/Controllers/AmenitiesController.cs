@@ -13,11 +13,11 @@ namespace AsyncInn.Controllers
     [Route("api/[controller]")]
     [ApiController]
    
-    public class AmenityController : ControllerBase
+    public class AmenitiesController : ControllerBase
     {
         private readonly IAmenity _amenity;
 
-        public AmenityController(IAmenity amenity)
+        public AmenitiesController(IAmenity amenity)
         {
             _amenity = amenity; 
         }
