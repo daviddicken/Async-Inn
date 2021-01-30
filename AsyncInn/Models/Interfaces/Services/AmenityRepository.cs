@@ -15,7 +15,6 @@ namespace AsyncInn.Models.Interfaces.Services
             _context = context;
         }
 
-
         public async Task<Amenity> Create(Amenity amenity)
         {
             _context.Entry(amenity).State = EntityState.Added;
