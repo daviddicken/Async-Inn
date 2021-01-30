@@ -16,23 +16,23 @@ It is a program to help manage a fictional hotel chain the Async Inn.
   * `/api/rooms` - returns rooms found in rooms table.
   * `/api/amenities` - returns amenities found in amenities table.
   * `/api/hotelRooms` - returns hotelRooms found in the hotelRooms table.
-* Routes:
-  Hotels:
+* Routes:  
+  **Hotels:**
   * `Get` `/api/hotels/{hotelId}` - returns data about one hotel.
   * `Put` `/api/hotels/{hotelId}` - with a body allows you to update one hotel.
   * `Post` `/api/hotels` - with a body allows you to create a new hotel.
-  * `Delete` `/api/hotels/{hotelId}` - deletes one hotel.
-  Rooms:
+  * `Delete` `/api/hotels/{hotelId}` - deletes one hotel.  
+  **Rooms:**
   * `Get` `/api/rooms/{roomId}` - returns data about one room.
   * `Put` `/api/rooms/{roomId}` - with a body allows you to update one room.
   * `Post` `/api/rooms` - with a body allows you to create a new room.
-  * `Delete` `/api/rooms/{roomId}` - deletes one room.
-  Amenities:
+  * `Delete` `/api/rooms/{roomId}` - deletes one room.  
+  **Amenities:**
   * `Get` `/api/ammenities/{amenityId}` - returns data about one amenity.
   * `Put` `/api/amenities/{amenityId}` - with a body allows you to update one amenity.
   * `Post` `/api/amenities` - with a body allows you to create a new amenity.
-  * `Delete` `/api/amenities/{amenitiyId}` - deletes one aminity.
-  HotelRooms:
+  * `Delete` `/api/amenities/{amenitiyId}` - deletes one aminity.  
+  **HotelRooms:**
   * `Get` `/api/hotelRooms/{hotelId}/{roomNumber}` - returns data about one hotelRoom.
   * `Put` `/api/hotelRooms/{hotelId}/{roomNumber}` - with a body allows you to update one hotelRoom.
   * `Post` `/api/hotelRooms` - with a body allows you to create a new hotelRoom.
