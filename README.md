@@ -50,3 +50,20 @@ It is a program to help manage a fictional hotel chain the Async Inn.
 ### Entity Relationship Diagram
 ![ERD](https://github.com/daviddicken/Async-Inn/blob/master/AsyncInn/Img/AsyncInnERD.PNG?raw=true)
 
+### Relationships
+* `Hotel` has a 1 to Many relationship with `HotelRoom`
+* `Room` has a one to many relationship with `HotelRoom`
+* `Room` has a one to many relationship with `RoomAmenities`
+* `Amenities` has a one to many relationship with `RoomAmenities`
+
+### Tables
+* Hotel - This table holds the data for each hotel in the AsynInn chain. Each one has a unique primary key. The properties that can be found in the hotel table are: the hotels name, city, state, country, phone number, and street address.
+
+* Room - This table holds data about a room including it's name and layout(studio, One Bedroom, or Two Bedrooms). Each room has a unique primary key.
+
+* Aminities - The amenities table hold data on amenities that can be found in any of the hotel rooms. Each amenity has a unique primary key and a name.
+
+* HotelRoom - HotelRoom is a joint table that joins a room from the room table to a hotel. The HotelRoom table will need to have a Hotel Id from a hotel in the Hotel table and a Room Id from a room in the Room table. It also has properties for a room number, rate, and a Boolean if pets are allowed. A composite key is made with the hotel id and room number.
+
+* RoomAmenities - This is a pure joint table that is used to link what amenities are found in a room. It only stores a Room Id and a Amenity Id and makes a composite key out of the two to link them.
+
