@@ -34,18 +34,20 @@ namespace AsyncInn.Models.Interfaces.Services
 
             var hotelRooms = await _context.HotelRooms
                 .Where(x => x.HotelId == id)
-                .Include(x => x.Room)
+                .Include(x => x.room)
                 .ToListAsync();
 
-            room.RoomAmenities = roomAmenities;
-            return room;
+            hotel.HotelRooms = hotelRooms;
+            return hotel;
         }
 
 
         public async Task<List<Hotel>> GetHotels()
         {
-            var hotels = await _context.Hotels.ToListAsync();
-            return hotels;
+            var hotel = await _context.Hotels.Include(ra => ra.HotelRooms)
+               .ThenInclude(ra => ra.room)
+               .ToListAsync();
+            return hotel;
         }
 
         public async Task<Hotel> UpdateHotel(int id, Hotel hotel)
