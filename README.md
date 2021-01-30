@@ -1,5 +1,5 @@
 # Async-Inn
-** Author: ** David Dicken
+** Author: ** David Dicken  
 ** Collaborators: ** Alan Hung, Scott Falbo
 
 ### OverView
@@ -13,5 +13,5 @@ It is a program to help manage a fictional hotel chain the Async Inn.
 * Controllers - Are were the routes methods are deffined. The properties are grabed from the url and fed to the methods to create, get, and manipulate data in the database.
 
 ### Entity Relationship Diagram
-[ERD](AsyncInn\Img\AsyncInnERD.PNG)
+[ERD](https://github.com/daviddicken/Async-Inn/blob/master/AsyncInn/Img/AsyncInnERD.PNG?raw=true)
 
