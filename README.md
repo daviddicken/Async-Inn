@@ -27,7 +27,9 @@ It is a program to help manage a fictional hotel chain the Async Inn.
   * `Get` `/api/rooms/{roomId}` - returns data about one room.
   * `Put` `/api/rooms/{roomId}` - with a body allows you to update one room.
   * `Post` `/api/rooms` - with a body allows you to create a new room.
-  * `Delete` `/api/rooms/{roomId}` - deletes one room.    **Amenities:**
+  * `Delete` `/api/rooms/{roomId}` - deletes one room.    
+  
+  **Amenities:**
   * `Get` `/api/ammenities/{amenityId}` - returns data about one amenity.
   * `Put` `/api/amenities/{amenityId}` - with a body allows you to update one amenity.
   * `Post` `/api/amenities` - with a body allows you to create a new amenity.
