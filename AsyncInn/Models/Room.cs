@@ -16,6 +16,7 @@ namespace AsyncInn.Models
 
         public List<RoomAmenities> RoomAmenities { get; set; }
 
+        public List<HotelRoom> HotelRooms { get; set; }
         public enum Layouts
         {
             Studio = 0,

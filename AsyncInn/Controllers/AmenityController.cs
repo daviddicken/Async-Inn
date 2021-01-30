@@ -67,7 +67,7 @@ namespace AsyncInn.Controllers
         {
             await _amenity.Create(amentiy);
 
-            return CreatedAtAction("GetStudent", new { id = amentiy.Id }, amentiy);
+            return CreatedAtAction("GetAmenity", new { id = amentiy.Id }, amentiy);
         }
 
         // DELETE: api/Amenities/5

@@ -25,23 +25,25 @@ namespace AsyncInn.Models.Interfaces.Services
 
         public async Task<Room> GetRoom(int Id)
         {
-            Room room = await _context.Rooms.FindAsync(Id);
-
-            var roomAmenities = await _context.RoomAmenities
-                .Where(x => x.RoomId == Id)
-                .Include(x => x.amenity)
-                .ToListAsync();
-
-            room.RoomAmenities = roomAmenities;
+            Room room = await _context.Rooms.Where(r => r.Id == Id)
+                                            .Include(x => x.RoomAmenities)
+                                            .ThenInclude(x => x.amenity)
+                                            .Include(x => x.HotelRooms)
+                                            .ThenInclude(x => x.hotel)
+                                            .FirstOrDefaultAsync();
             return room;
         }
 
         public async Task<List<Room>> GetRooms()
         {
-            var room = await _context.Rooms.Include(ra => ra.RoomAmenities)
+            var rooms = await _context.Rooms
+                .Include(ra => ra.RoomAmenities)
                 .ThenInclude(ra => ra.amenity)
+                .Include(hr => hr.HotelRooms)
+                .ThenInclude(h => h.hotel)
                 .ToListAsync();
-            return room;
+
+            return rooms;
         }
 
         public async Task<Room> UpdateRoom(int Id, Room room)
