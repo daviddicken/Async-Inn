@@ -14,9 +14,19 @@ namespace AsyncInn.Models
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<RoomAmenities> RoomAmenities { get; set; }
+        public DbSet<HotelRoom> HotelRooms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<RoomAmenities>().HasKey(
+                roomAmenities => new { roomAmenities.RoomId, roomAmenities.AmenityId });
+
+            modelBuilder.Entity<HotelRoom>().HasKey(
+               hotelRooms => new {hotelRooms.HotelId, hotelRooms.RoomNumber });
+
+
+
             modelBuilder.Entity<Hotel>().HasData(new Hotel
             {
                 Id = 1,
@@ -96,6 +106,53 @@ namespace AsyncInn.Models
             });
 
 
+            modelBuilder.Entity<RoomAmenities>().HasData(new RoomAmenities
+            {
+                AmenityId = 2,
+                RoomId = 2
+
+            });
+
+            modelBuilder.Entity<RoomAmenities>().HasData(new RoomAmenities
+            {
+                AmenityId = 3,
+                RoomId = 1
+
+            });
+
+            modelBuilder.Entity<RoomAmenities>().HasData(new RoomAmenities
+            {
+                AmenityId = 3,
+                RoomId = 2
+
+            });
+
+            modelBuilder.Entity<HotelRoom>().HasData(new HotelRoom
+            {
+                HotelId = 1,
+                RoomId = 1,
+                RoomNumber = 1,
+                Rate = 150,
+                PetFriendly = true
+            });
+
+            modelBuilder.Entity<HotelRoom>().HasData(new HotelRoom
+            {
+                HotelId = 1,
+                RoomId = 3,
+                RoomNumber = 2,
+                Rate = 50,
+                PetFriendly = true
+            });
+
+            modelBuilder.Entity<HotelRoom>().HasData(new HotelRoom
+            {
+                HotelId = 3,
+                RoomId = 3,
+                RoomNumber = 3,
+                Rate = 20,
+                PetFriendly = false
+            });
         }
 
     }
