@@ -33,25 +33,42 @@ namespace AsyncInn.Models.Interfaces.Services
 
         public async Task<RoomDTO> GetRoom(int Id)
         {
-            return await _context.Rooms
+            //return await _context.Rooms
+            RoomDTO room = await _context.Rooms
+                .Where(r => r.Id == Id)
                 .Select(room => new RoomDTO
                 {
                     Id = room.Id,
                     Layout = room.Layout,
-                    Name = room.Name
+                    Name = room.Name,
+                    Amenities = room.RoomAmenities
+                                    .Select(ra => new AmenityDTO
+                                    {
+                                        Id = ra.amenity.Id,
+                                        Item = ra.amenity.Item
+                                    }).ToList()
                 }).FirstOrDefaultAsync();
 
+            return room;
         }
 
         public async Task<List<RoomDTO>> GetRooms()
         {
-            return await _context.Rooms
-                .Select(room => new RoomDTO
-                {
-                    Id = room.Id,
-                    Layout = room.Layout,
-                    Name = room.Name
-                }).ToListAsync();
+            var room = await _context.Rooms
+                 .Select(room => new RoomDTO
+                 {
+                     Id = room.Id,
+                     Layout = room.Layout,
+                     Name = room.Name,
+                     Amenities = room.RoomAmenities
+                                     .Select(ra => new AmenityDTO
+                                     {
+                                         Id = ra.amenity.Id,
+                                         Item = ra.amenity.Item
+                                     }).ToList()
+                 }).ToListAsync();
+
+            return room;
 
             //var rooms = await _context.Rooms
             //    .Include(ra => ra.RoomAmenities)
@@ -63,8 +80,14 @@ namespace AsyncInn.Models.Interfaces.Services
             //return rooms;
         }
 
-        public async Task<RoomDTO> UpdateRoom(int Id, RoomDTO room)
+        public async Task<Room> UpdateRoom(int Id, RoomDTO roomDTO)
         {
+            Room room = new Room()
+            {
+                Id = roomDTO.Id,
+                Layout = roomDTO.Layout,
+                Name = roomDTO.Name
+            };
             _context.Entry(room).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return room;

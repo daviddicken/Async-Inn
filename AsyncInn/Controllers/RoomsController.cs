@@ -63,7 +63,7 @@ namespace AsyncInn.Controllers
 
         // DELETE: api/Rooms/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Room>> DeleteRoom(int id)
+        public async Task<ActionResult<RoomDTO>> DeleteRoom(int id)
         {
             await _room.DeleteRoom(id);
             return NoContent();

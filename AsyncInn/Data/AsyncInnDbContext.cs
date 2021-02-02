@@ -64,7 +64,7 @@ namespace AsyncInn.Models
             {
                 Id = 1,
                 Name = "Pups Place",
-                Layout = 0
+                Layout = Room.Layouts.TwoBedroom
               
             });
 
@@ -72,7 +72,7 @@ namespace AsyncInn.Models
             {
                 Id = 2,
                 Name = "Family Fort",
-                Layout = 2
+                Layout = Room.Layouts.OneBedroom
 
             });
 
@@ -80,7 +80,7 @@ namespace AsyncInn.Models
             {
                 Id = 3,
                 Name = "Solo Suite",
-                Layout = 1
+                Layout = Room.Layouts.Studio
 
             });
 

@@ -7,7 +7,7 @@ namespace AsyncInn.Models.API
 {
     public class HotelDTO
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
