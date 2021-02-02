@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Models;
 using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.API;
 
 namespace AsyncInn.Controllers
 {
@@ -23,15 +24,17 @@ namespace AsyncInn.Controllers
 
         // GET: api/HotelRooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms()
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms()
         {
             return Ok(await _hotelRoom.GetHotelRooms());
         }
 
         // GET: api/HotelRooms/5
         [HttpGet("{hotelId}/{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int hotelId, int roomNumber)
+        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelId, int roomNumber)
         {
+
+
             return await _hotelRoom.GetHotelRoom(hotelId, roomNumber);
         }
 
@@ -39,7 +42,7 @@ namespace AsyncInn.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{hotelId}/{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(HotelRoom hotelRoom)
+        public async Task<IActionResult> PutHotelRoom(HotelRoomDTO hotelRoom)
         {
             var updateRoom = await _hotelRoom.UpdateHotelRoom(hotelRoom);
             return Ok(updateRoom);
@@ -49,7 +52,7 @@ namespace AsyncInn.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(HotelRoom hotelRoom)
+        public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(HotelRoomDTO hotelRoom)
         {
             await _hotelRoom.Create(hotelRoom);
 
