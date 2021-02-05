@@ -19,6 +19,7 @@ namespace AsyncInn.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); // do I need this???
             modelBuilder.Entity<RoomAmenities>().HasKey(
                 roomAmenities => new { roomAmenities.RoomId, roomAmenities.AmenityId });
 

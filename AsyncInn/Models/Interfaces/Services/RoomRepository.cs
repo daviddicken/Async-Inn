@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AsyncInn.Models.Interfaces.Services
+namespace AsyncInn.Models.Interfaces //.Services
 {
     public class RoomRepository : IRoom
     {
@@ -95,7 +95,7 @@ namespace AsyncInn.Models.Interfaces.Services
        
         public async Task DeleteRoom(int Id)
         {
-            RoomDTO room = await GetRoom(Id);
+            Room room = await _context.Rooms.FindAsync(Id);
             _context.Entry(room).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }

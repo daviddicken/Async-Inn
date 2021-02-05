@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AsyncInn.Models;
+﻿using AsyncInn.Models.API;
 using AsyncInn.Models.Interfaces;
-using AsyncInn.Models.API;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AsyncInn.Controllers
 {
@@ -71,7 +66,7 @@ namespace AsyncInn.Controllers
 
         [HttpPost]
         [Route("{roomId}/{amenityId}")]
-        
+
         public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
         {
             await _room.AddAmenityToRoom(roomId, amenityId);
@@ -86,6 +81,6 @@ namespace AsyncInn.Controllers
             await _room.RemoveAmenity(roomId, amenityId);
             return NoContent();
         }
-    
+
     }
 }

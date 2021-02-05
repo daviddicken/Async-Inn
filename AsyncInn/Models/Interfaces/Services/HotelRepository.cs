@@ -33,7 +33,9 @@ namespace AsyncInn.Models.Interfaces.Services
 
         public async Task DeleteHotel(int id)
         {
-            HotelDTO hotel = await GetHotel(id);
+            //HotelDTO hotel = await GetHotel(id);
+            Hotel hotel = await _context.Hotels.FindAsync(id);
+
             _context.Entry(hotel).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
@@ -58,18 +60,18 @@ namespace AsyncInn.Models.Interfaces.Services
                                                         RoomNumber = hr.RoomNumber,
                                                         Rate = hr.Rate,
                                                         PetFriendly = hr.PetFriendly,
-                                                        Room = hr.room.HotelRooms
+                                                        Room = hr.Room.HotelRooms
                                                                 .Select(r => new RoomDTO()
                                                                 {
-                                                                    Id = r.room.Id,
-                                                                    Name = r.room.Name,
-                                                                    Layout = r.room.Layout,
-                                                                    Amenities = r.room.RoomAmenities
-                                                                                .Select(ra => new AmenityDTO()
-                                                                                {
-                                                                                    Id = ra.amenity.Id,
-                                                                                    Item = ra.amenity.Item
-                                                                                }).ToList()
+                                                                    Id = r.Room.Id,
+                                                                    Name = r.Room.Name,
+                                                                    Layout = r.Room.Layout
+                                                                    //Amenities = r.room.RoomAmenities
+                                                                    //            .Select(ra => new AmenityDTO()
+                                                                    //            {
+                                                                    //                Id = ra.amenity.Id,
+                                                                    //                Item = ra.amenity.Item
+                                                                    //            }).ToList()
 
                                                                 }).FirstOrDefault()
                                                     }).ToList()
@@ -82,6 +84,18 @@ namespace AsyncInn.Models.Interfaces.Services
             //    .ToListAsync();
 
             //hotel.HotelRooms = hotelRooms;
+            //foreach(var hotelRoom in hotel.Rooms)
+            //{
+            //    var ra = await _context.RoomAmenities;
+            //              .Where(ra => ra.RoomId == hotelRoom.RoomId)
+            //              .Select(a => new AmenityDTO()
+            //              {
+            //                  Id = a.amenity.Id,
+            //                  Item = a.amenity.Item
+            //              })
+            //              .ToListAsync();
+            //    hotelRoom.Room.Amenities = ra; 
+            //}
             return hotel;
         }
 
@@ -105,18 +119,18 @@ namespace AsyncInn.Models.Interfaces.Services
                                                         RoomNumber = hr.RoomNumber,
                                                         Rate = hr.Rate,
                                                         PetFriendly = hr.PetFriendly,
-                                                        Room = hr.room.HotelRooms
+                                                        Room = hr.Room.HotelRooms
                                                                 .Select(r => new RoomDTO()
                                                                 {
-                                                                    Id = r.room.Id,
-                                                                    Name = r.room.Name,
-                                                                    Layout = r.room.Layout
+                                                                    Id = r.Room.Id,
+                                                                    Name = r.Room.Name,
+                                                                    Layout = r.Room.Layout
                                                                     //Amenities = r.room.RoomAmenities
-                                                                                //.Select(ra => new AmenityDTO()
-                                                                                //{
-                                                                                //    Id = ra.amenity.Id,
-                                                                                //    Item = ra.amenity.Item
-                                                                                //}).ToList()
+                                                                    //.Select(ra => new AmenityDTO()
+                                                                    //{
+                                                                    //    Id = ra.amenity.Id,
+                                                                    //    Item = ra.amenity.Item
+                                                                    //}).ToList()
 
                                                                 }).FirstOrDefault()
                                                     }).ToList()
