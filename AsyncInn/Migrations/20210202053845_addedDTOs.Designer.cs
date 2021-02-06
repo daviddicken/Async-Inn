@@ -3,14 +3,16 @@ using AsyncInn.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    partial class AsyncInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210202053845_addedDTOs")]
+    partial class addedDTOs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,13 +244,13 @@ namespace AsyncInn.Migrations
 
             modelBuilder.Entity("AsyncInn.Models.HotelRoom", b =>
                 {
-                    b.HasOne("AsyncInn.Models.Hotel", "Hotel")
+                    b.HasOne("AsyncInn.Models.Hotel", "hotel")
                         .WithMany("HotelRooms")
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AsyncInn.Models.Room", "Room")
+                    b.HasOne("AsyncInn.Models.Room", "room")
                         .WithMany("HotelRooms")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)

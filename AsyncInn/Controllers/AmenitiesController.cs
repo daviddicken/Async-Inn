@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using AsyncInn.Models.API;
 using AsyncInn.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,23 +25,15 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenity
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             return await _amenity.GetAmenities();
         }
 
         // GET: api/Amenitys/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenity>> GetAmenity(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
-            //var amentiy = await _amenity.GetAmenity(id);
-
-            //if (amentiy == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return amentiy;
             return await _amenity.GetAmenity(id);
         }
 
@@ -63,7 +56,7 @@ namespace AsyncInn.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Amenity>> PostAmenity(Amenity amentiy)
+        public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amentiy)
         {
             await _amenity.Create(amentiy);
 
