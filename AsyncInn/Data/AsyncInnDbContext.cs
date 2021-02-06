@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models
 {
-    public class AsyncInnDbContext : DbContext
+    public class AsyncInnDbContext : IdentityDbContext<ApplicationUser>
     {
         public AsyncInnDbContext(DbContextOptions options) : base(options) { }
 
@@ -19,7 +20,8 @@ namespace AsyncInn.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); // do I need this???
+            base.OnModelCreating(modelBuilder); 
+
             modelBuilder.Entity<RoomAmenities>().HasKey(
                 roomAmenities => new { roomAmenities.RoomId, roomAmenities.AmenityId });
 

@@ -4,6 +4,7 @@ using AsyncInn.Models.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,10 @@ namespace AsyncInn
         {
             services.AddMvc();
             services.AddControllers();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AsyncInnDbContext>();
 
             services.AddDbContext<AsyncInnDbContext>(options =>
             {
@@ -40,7 +45,9 @@ namespace AsyncInn
             services.AddTransient<IHotel, HotelRepository>();
             services.AddTransient<IAmenity, AmenityRepository>();
             services.AddTransient<IHotelRoom, HotelRoomRepository>();
-            
+            services.AddTransient<IUserService, IdentityUserService>();
+
+
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
