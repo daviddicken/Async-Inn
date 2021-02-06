@@ -71,17 +71,13 @@ namespace AsyncInn
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/api/v1/swagger.json", "Async Inn");
-                options.RoutePrefix = "docs";
+                options.RoutePrefix = "";
             });
 
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapGet("/", async context =>
-                {
-                   await context.Response.WriteAsync("Hello World!");
-                });
             });
         }
     }
