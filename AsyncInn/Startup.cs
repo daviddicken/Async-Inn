@@ -1,18 +1,14 @@
 using AsyncInn.Models;
 using AsyncInn.Models.Interfaces;
 using AsyncInn.Models.Interfaces.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn
 {
@@ -34,6 +30,31 @@ namespace AsyncInn
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AsyncInnDbContext>();
+
+            services.AddScoped<JwtTokenService>();
+            // Add the wiring for adding "Authentication" for our API
+            // "We want the system to always use these "Schemes" to authenticate us
+            // This allows us to annotate our routes            
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                 {
+                     // Tell the authenticaion scheme "how/where" to validate the token + secret
+                     options.TokenValidationParameters = JwtTokenService.GetValidationParameters(Configuration);
+                 });
+
+            services.AddAuthorization(options =>
+            {
+                // Add "Name of Policy", and the Lambda returns a definition
+                options.AddPolicy("create", policy => policy.RequireClaim("permissions", "create"));
+                options.AddPolicy("read", policy => policy.RequireClaim("permissions", "read"));
+                options.AddPolicy("update", policy => policy.RequireClaim("permissions", "update"));
+                options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
+            });
 
             services.AddDbContext<AsyncInnDbContext>(options =>
             {
@@ -71,6 +92,8 @@ namespace AsyncInn
             }
 
             app.UseRouting();
+            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseSwagger(options =>
             {
                 options.RouteTemplate = "/api/{documentName}/swagger.json";

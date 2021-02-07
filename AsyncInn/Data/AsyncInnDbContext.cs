@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,6 +29,9 @@ namespace AsyncInn.Models
             modelBuilder.Entity<HotelRoom>().HasKey(
                hotelRooms => new {hotelRooms.HotelId, hotelRooms.RoomNumber });
 
+            SeedRole(modelBuilder, "District Manager", "create", "read", "update", "delete");
+            SeedRole(modelBuilder, "Property Manager");
+            SeedRole(modelBuilder, "Agent");
 
 
             modelBuilder.Entity<Hotel>().HasData(new Hotel
@@ -156,6 +160,30 @@ namespace AsyncInn.Models
                 Rate = 20,
                 PetFriendly = false
             });
+        }
+
+        private int Id = 1;
+        private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+
+            var roleClaims = permissions.Select(permission =>          
+                new IdentityRoleClaim<string>
+                {
+                    Id = Id++,
+                    RoleId = role.Id,
+                    ClaimType = "permissions",
+                    ClaimValue = permission
+                }
+            );
+            modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(roleClaims);
         }
 
     }
