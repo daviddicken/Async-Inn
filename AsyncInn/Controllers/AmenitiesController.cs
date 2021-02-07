@@ -1,6 +1,7 @@
 ﻿using AsyncInn.Models;
 using AsyncInn.Models.API;
 using AsyncInn.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
    
@@ -24,6 +26,8 @@ namespace AsyncInn.Controllers
         }
 
         // GET: api/Amenity
+        [AllowAnonymous]
+        [Authorize(Roles = "District Manager")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
@@ -31,6 +35,8 @@ namespace AsyncInn.Controllers
         }
 
         // GET: api/Amenitys/5
+        [AllowAnonymous]
+        [Authorize(Roles = "District Manager")]
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
@@ -40,6 +46,7 @@ namespace AsyncInn.Controllers
         // PUT: api/Amenities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = "District Manager")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
         {
@@ -55,6 +62,7 @@ namespace AsyncInn.Controllers
         // POST: api/Amenity
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize(Roles = "District Manager")]
         [HttpPost]
         public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amentiy)
         {
@@ -64,6 +72,7 @@ namespace AsyncInn.Controllers
         }
 
         // DELETE: api/Amenities/5
+        [Authorize(Roles = "District Manager")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Amenity>> DeleteAmenity(int id)
         {

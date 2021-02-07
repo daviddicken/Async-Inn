@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Models.API;
 using AsyncInn.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +21,7 @@ namespace AsyncInn.Controllers
             userService = service;
         }
 
+
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterUser data)
         {
@@ -35,6 +37,15 @@ namespace AsyncInn.Controllers
             var user = await userService.Authenticate(data.Username, data.Password);
             if (user != null) return user;
             return Unauthorized();
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDTO>> Me()
+        {
+            // Following the [Authorize] phase, this.User will be ... you.
+            // Put a breakpoint here and inspect to see what's passed to our getUser method
+            return await userService.GetUser(this.User);
         }
     }
 }
